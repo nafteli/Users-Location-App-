@@ -3517,6 +3517,40 @@
                     }
                 },
                 {
+                    "source": "/home/mefathim-tech-29/spool/userlocation/android/app/build/generated/res/resValues/debug/values/gradleResValues.xml",
+                    "from": {
+                        "startLines": "6,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "156,262",
+                        "endColumns": "63,68",
+                        "endOffsets": "215,326"
+                    },
+                    "to": {
+                        "startLines": "304,305",
+                        "startColumns": "4,4",
+                        "startOffsets": "19501,19565",
+                        "endColumns": "63,68",
+                        "endOffsets": "19560,19629"
+                    }
+                },
+                {
+                    "source": "/home/mefathim-tech-29/spool/userlocation/android/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "59",
+                        "endOffsets": "71"
+                    },
+                    "to": {
+                        "startLines": "336",
+                        "startColumns": "4",
+                        "startOffsets": "21726",
+                        "endColumns": "59",
+                        "endOffsets": "21781"
+                    }
+                },
+                {
                     "source": "/home/mefathim-tech-29/.gradle/caches/transforms-3/03f04a3f11198ce3b7c6cedb9b41266b/transformed/jetified-flipper-0.125.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3",
@@ -3553,6 +3587,25 @@
                     }
                 },
                 {
+                    "source": "/home/mefathim-tech-29/spool/userlocation/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "54",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "267"
+                    },
+                    "to": {
+                        "startLines": "424",
+                        "startColumns": "4",
+                        "startOffsets": "30578",
+                        "endLines": "427",
+                        "endColumns": "12",
+                        "endOffsets": "30756"
+                    }
+                },
+                {
                     "source": "/home/mefathim-tech-29/.gradle/caches/transforms-3/5b94eed69c74e072e7c17c8facb87462/transformed/jetified-play-services-maps-18.0.2/res/values/values.xml",
                     "from": {
                         "startLines": "4",
@@ -3572,23 +3625,6 @@
                     }
                 },
                 {
-                    "source": "/home/mefathim-tech-29/spool/ReactNativeGeolocation/android/app/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "59",
-                        "endOffsets": "71"
-                    },
-                    "to": {
-                        "startLines": "336",
-                        "startColumns": "4",
-                        "startOffsets": "21726",
-                        "endColumns": "59",
-                        "endOffsets": "21781"
-                    }
-                },
-                {
                     "source": "/home/mefathim-tech-29/.gradle/caches/transforms-3/0bbaa5972f900275fec64cf526ac0bea/transformed/lifecycle-viewmodel-2.3.1/res/values/values.xml",
                     "from": {
                         "startLines": "2",
@@ -3603,23 +3639,6 @@
                         "startOffsets": "19076",
                         "endColumns": "49",
                         "endOffsets": "19121"
-                    }
-                },
-                {
-                    "source": "/home/mefathim-tech-29/spool/ReactNativeGeolocation/android/app/build/generated/res/resValues/debug/values/gradleResValues.xml",
-                    "from": {
-                        "startLines": "6,8",
-                        "startColumns": "4,4",
-                        "startOffsets": "156,262",
-                        "endColumns": "63,68",
-                        "endOffsets": "215,326"
-                    },
-                    "to": {
-                        "startLines": "304,305",
-                        "startColumns": "4,4",
-                        "startOffsets": "19501,19565",
-                        "endColumns": "63,68",
-                        "endOffsets": "19560,19629"
                     }
                 },
                 {
@@ -3692,25 +3711,6 @@
                         "startOffsets": "21643",
                         "endColumns": "82",
                         "endOffsets": "21721"
-                    }
-                },
-                {
-                    "source": "/home/mefathim-tech-29/spool/ReactNativeGeolocation/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "54",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "267"
-                    },
-                    "to": {
-                        "startLines": "424",
-                        "startColumns": "4",
-                        "startOffsets": "30578",
-                        "endLines": "427",
-                        "endColumns": "12",
-                        "endOffsets": "30756"
                     }
                 },
                 {
