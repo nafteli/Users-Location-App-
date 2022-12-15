@@ -4,6 +4,7 @@ import MapView from 'react-native-maps';
 import {StyleSheet, View, PermissionsAndroid} from 'react-native';
 import {addToCollection} from './firebaseDB/add';
 import {checkCoordinates} from './checkCoordinates';
+import {gpxfile} from './GPXParser';
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -31,6 +32,7 @@ const requestLocationPermission = async () => {
   }
 };
 const App = () => {
+  // gpxfile();
   // state to hold location
   const [location, setLocation] = useState({
     latitude: 37.4219927,
@@ -90,13 +92,10 @@ const App = () => {
         }
         showsUserLocation={true}
         followsUserLocation={true} //Apple Maps only.
-        userLocationPriority={'high'}
-        userLocationUpdateInterval={5000}
+        userLocationPriority={'high'} //android maps only.
+        userLocationUpdateInterval={5000} //
         showsCompass={true}
         loadingEnabled={true}
-        // onRegionChangeComplete={e => {
-        //   console.log('onRegionChangeComplete', e);
-        // }}
         onUserLocationChange={event => {
           // console.log('onUserLocationChange', event.nativeEvent.coordinate);
           setLocation({
