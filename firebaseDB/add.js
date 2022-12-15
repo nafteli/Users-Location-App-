@@ -20,6 +20,7 @@ export const addToCollection = async locations => {
       documentID = ref.id;
     })
     .catch(error => {
+      console.log(error);
       alert(error);
     });
   console.log(

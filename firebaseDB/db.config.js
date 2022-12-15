@@ -12,9 +12,28 @@ const firebaseConfig = {
   measurementId: 'G-KJ17D8DQBN',
 };
 
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyBtgAKIb4eSjNRJL90hmNVeAUJL3R8lcUo',
+
+//   authDomain: 'naftaliproject.firebaseapp.com',
+
+//   projectId: 'naftaliproject',
+
+//   storageBucket: 'naftaliproject.appspot.com',
+
+//   messagingSenderId: '184408479051',
+
+//   appId: '1:184408479051:web:f7957e78763de2153b84ce',
+
+//   measurementId: 'G-FXZSK6EZFN',
+// };
+
+console.log('firebase connect', firebase.apps.length);
 if (!firebase.apps.length) {
-  console.log('firebase connect');
   firebase.initializeApp(firebaseConfig);
 }
+firebase
+  .firestore()
+  .settings({experimentalForceLongPolling: true, merge: true});
 
 export {firebase};

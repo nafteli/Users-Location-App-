@@ -55,11 +55,11 @@ const App = () => {
                 longitudeDelta: 0.0435,
               });
               console.log('location in useEffect', location);
-              let id = addToCollection({
+              addToCollection({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               });
-              console.log('document id', id);
+              // console.log('document id', id);
             },
             error => {
               // See error code charts below.
@@ -89,11 +89,21 @@ const App = () => {
               }
         }
         showsUserLocation={true}
-        followsUserLocation={true}
-        onUserLocationChange={(event) => {
+        followsUserLocation={true} //Apple Maps only.
+        userLocationPriority={'high'}
+        userLocationUpdateInterval={5000}
+        showsCompass={true}
+        loadingEnabled={true}
+        // onRegionChangeComplete={e => {
+        //   console.log('onRegionChangeComplete', e);
+        // }}
+        onUserLocationChange={event => {
+          // console.log('onUserLocationChange', event.nativeEvent.coordinate);
           setLocation({
             latitude: event.nativeEvent.coordinate.latitude,
             longitude: event.nativeEvent.coordinate.longitude,
+            latitudeDelta: 0.009,
+            longitudeDelta: 0.009,
           });
           checkCoordinates(location, event.nativeEvent.coordinate);
         }}
