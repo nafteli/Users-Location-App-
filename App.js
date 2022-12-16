@@ -93,7 +93,7 @@ const App = () => {
         showsUserLocation={true}
         followsUserLocation={true} //Apple Maps only.
         userLocationPriority={'high'} //android maps only.
-        userLocationUpdateInterval={5000} //
+        userLocationUpdateInterval={5000} //folllwo user location updates every 5 seconds
         showsCompass={true}
         loadingEnabled={true}
         onUserLocationChange={event => {

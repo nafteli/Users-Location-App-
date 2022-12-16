@@ -23,6 +23,20 @@ dist/
 target/
 dist/
 
+
+# Android Studio
+.project
+.settings
+.classpath
+
+# Android
+.idea
+.gradle
+local.properties
+*.iml
+/android/*
+!/android/README.md
+
 # JetBrains IDE
 .idea/
 
