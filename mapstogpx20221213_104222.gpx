@@ -32,28 +32,36 @@
   <number>1</number>
   <trkseg>
   <trkpt lat="32.0926523" lon="34.8382823">
+    <time>2022-12-13T12:40:19Z</time>
     <name>TP001</name>
   </trkpt>
   <trkpt lat="32.09265" lon="34.83809">
+    <time>2022-12-13T12:40:20Z</time>
     <name>TP002</name>
   </trkpt>
   <trkpt lat="32.09266" lon="34.838">
+    <time>2022-12-13T12:40:21Z</time>
     <name>TP003</name>
   </trkpt>
   <trkpt lat="32.09266" lon="34.83796">
+    <time>2022-12-13T12:40:22Z</time>
     <name>TP004</name>
   </trkpt>
   <trkpt lat="32.0926584" lon="34.8379585">
     <name>TP005</name>
+    <time>2022-12-13T12:40:23Z</time>
   </trkpt>
   <trkpt lat="32.09202" lon="34.83783">
     <name>TP006</name>
+    <time>2022-12-13T12:40:24Z</time>
   </trkpt>
   <trkpt lat="32.09185" lon="34.83779">
     <name>TP007</name>
+    <time>2022-12-13T12:40:25Z</time>
   </trkpt>
   <trkpt lat="32.09183" lon="34.83779">
     <name>TP008</name>
+    <time>2022-12-13T12:40:26Z</time>
   </trkpt>
   <trkpt lat="32.09167" lon="34.83775">
     <name>TP009</name>

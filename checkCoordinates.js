@@ -1,4 +1,28 @@
 import {addToCollection} from './firebaseDB/add';
+import {getDistance, getPreciseDistance} from 'geolib';
+
+export const checkCoordinateswithgetdistance = (
+  oldCordinates,
+  newCordinates,
+) => {
+  console.log(
+    'oldCordinates:',
+    oldCordinates.latitude,
+    oldCordinates.longitude,
+    'newCordinates',
+    newCordinates.latitude,
+    newCordinates.longitude,
+  );
+  if (!oldCordinates && !newCordinates) {
+    return;
+  }
+  let distance = getPreciseDistance(
+    {latitude: oldCordinates.latitude, longitude: oldCordinates.longitude},
+    {latitude: newCordinates.latitude, longitude: newCordinates.longitude},
+  );
+  console.log('distance:', distance);
+  return distance;
+};
 
 export const checkCoordinates = (coordinates, currentLocation) => {
   if (!coordinates || !currentLocation) {
@@ -9,16 +33,16 @@ export const checkCoordinates = (coordinates, currentLocation) => {
     console.error('I only know how to handle objects');
     return;
   }
-  if (
-    cutCoordinate(coordinates.latitude) !==
-      cutCoordinate(currentLocation.latitude) ||
-    cutCoordinate(coordinates.longitude) !==
-      cutCoordinate(currentLocation.longitude)
-  ) {
+  let distance = checkCoordinateswithgetdistance(coordinates, currentLocation);
+  if (distance >= 1000) {
+    console.log('I write the coordinates to the database');
     addToCollection({
       latitude: currentLocation.latitude,
       longitude: currentLocation.longitude,
     });
+  }
+  if (distance < 1000) {
+    console.log('The distance is too small its:', distance);
   }
 };
 
