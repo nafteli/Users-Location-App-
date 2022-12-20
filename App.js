@@ -3,11 +3,7 @@ import Geolocation from 'react-native-geolocation-service';
 import MapView from 'react-native-maps';
 import {StyleSheet, View, PermissionsAndroid} from 'react-native';
 import {addToCollection} from './firebaseDB/add';
-import {
-  checkCoordinates,
-  checkCoordinateswithgetdistance,
-} from './checkCoordinates';
-import {gpxfile} from './GPXParser';
+import {checkCoordinates} from './checkCoordinates';
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -35,7 +31,6 @@ const requestLocationPermission = async () => {
   }
 };
 const App = () => {
-  // gpxfile();
   // state to hold location
   const [location, setLocation] = useState({
     latitude: 37.4219927,
@@ -76,6 +71,7 @@ const App = () => {
         }
       });
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // console.log('location', location, new Date().toLocaleString());
 

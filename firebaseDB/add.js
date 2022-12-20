@@ -1,5 +1,6 @@
 import {firebase} from './db.config';
 
+// eslint-disable-next-line prettier/prettier
 export const addToCollection = async locations => {
   let documentID;
   const time = firebase.firestore.FieldValue.serverTimestamp();
@@ -10,26 +11,20 @@ export const addToCollection = async locations => {
     createdAt: time,
   };
 
-  console.log(
-    `add ${locations.latitude} ${locations.longitude} to db in collection coordinates`,
-  );
+  console.log('add coordinates to db in collection coordinates');
   await addToCollectionByName
     .add(locationWithTime)
     .then(ref => {
-      console.log(ref.id, 'ref.id');
+      // console.log(ref.id, 'ref.id');
       documentID = ref.id;
     })
     .catch(error => {
       console.log(error);
       alert(error);
+      return false;
     });
-  console.log(
-    'documentID',
-    documentID,
-    !documentID,
-    new Date().toLocaleString(),
-  );
-  return documentID;
+  // console.log('documentID', documentID, new Date().toLocaleString());
+  return documentID && true;
 };
 
 // export const updateLocation = (location, documentId) => {
