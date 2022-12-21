@@ -32,6 +32,7 @@ console.log('firebase connect', firebase.apps.length);
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
+firebase.auth();
 firebase
   .firestore()
   .settings({experimentalForceLongPolling: true, merge: true});
