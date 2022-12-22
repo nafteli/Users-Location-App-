@@ -79,8 +79,9 @@ export const checkCoordinates = (coordinates, currentLocation) => {
   }
   //get distance between new and old coordinates from getPreciseDistance
   let distance = checkCoordinatesWithgetDistance(coordinates, currentLocation);
+  let distanceToSave = 1000;
   //The distance is big enough update the data base
-  if (distance >= 1000) {
+  if (distance >= distanceToSave) {
     console.log('I write the coordinates to the database');
     console.log(coordinates, currentLocation);
     addToCollection({
@@ -90,7 +91,7 @@ export const checkCoordinates = (coordinates, currentLocation) => {
     return true;
   }
   //The distance is not big enough to update the data base
-  if (distance < 1000) {
+  if (distance < distanceToSave) {
     console.log(`The distance ${distance} its too small`);
     return false;
   }
