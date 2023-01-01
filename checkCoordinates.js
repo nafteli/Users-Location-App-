@@ -1,5 +1,6 @@
 import {addToCollection} from './firebaseDB/add';
 import {getDistance, getPreciseDistance} from 'geolib';
+import {writeUserData} from './firebaseDB/rtdb_write_read';
 
 export const checkCoordinatesWithgetDistance = (
   oldCordinates,
@@ -31,7 +32,7 @@ export const checkCoordinatesWithgetDistance = (
     {latitude: oldCordinates.latitude, longitude: oldCordinates.longitude},
     {latitude: newCordinates.latitude, longitude: newCordinates.longitude},
   );
-  console.log('distance:', distance);
+  // console.log('distance:', distance);
   return distance;
 };
 
@@ -43,7 +44,11 @@ export const check_lat_lon = (lat, lon) => {
   return validLat && validLon;
 };
 
-export const checkCoordinates = (coordinates, currentLocation) => {
+export const checkCoordinates = (
+  coordinates,
+  currentLocation,
+  setuserMarker,
+) => {
   //chect if new and old coordinates exist
   if (!coordinates || !currentLocation) {
     console.error('I have to get coordinates and currentLocation');
@@ -79,20 +84,28 @@ export const checkCoordinates = (coordinates, currentLocation) => {
   }
   //get distance between new and old coordinates from getPreciseDistance
   let distance = checkCoordinatesWithgetDistance(coordinates, currentLocation);
-  let distanceToSave = 1000;
+  let distanceToSave = 10;
   //The distance is big enough update the data base
   if (distance >= distanceToSave) {
     console.log('I write the coordinates to the database');
     console.log(coordinates, currentLocation);
-    addToCollection({
+    writeUserData({
       latitude: currentLocation.latitude,
       longitude: currentLocation.longitude,
     });
+    setuserMarker({
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
+    });
+    // addToCollection({
+    //   latitude: currentLocation.latitude,
+    //   longitude: currentLocation.longitude,
+    // });
     return true;
   }
   //The distance is not big enough to update the data base
   if (distance < distanceToSave) {
-    console.log(`The distance ${distance} its too small`);
+    // console.log(`The distance ${distance} its too small`);
     return false;
   }
 };

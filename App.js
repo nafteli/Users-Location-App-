@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import MapView from 'react-native-maps';
-import {StyleSheet, View, PermissionsAndroid} from 'react-native';
-import {addToCollection} from './firebaseDB/add';
+import {StyleSheet, View, PermissionsAndroid, AppState} from 'react-native';
+// import {addToCollection} from './firebaseDB/add';
 import {checkCoordinates} from './checkCoordinates';
+import {showMarkersOnMap} from './markers';
+import {removeUser, writeUserData} from './firebaseDB/rtdb_write_read';
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -18,47 +20,56 @@ const requestLocationPermission = async () => {
         buttonPositive: 'OK',
       },
     );
-    console.log('granted', granted);
+    console.info('granted', granted);
     if (granted === 'granted') {
-      console.log('You can use Geolocation');
+      console.info('You can use Geolocation');
       return true;
     } else {
-      console.log('You cannot use Geolocation');
+      console.info('You cannot use Geolocation');
       return false;
     }
   } catch (err) {
+    console.error(err);
     return false;
   }
 };
+
 const App = () => {
   // state to hold location
   const [location, setLocation] = useState({
-    latitude: 37.4219927,
-    longitude: -122.0840173,
+    latitude: 32.09266,
+    longitude: 34.8379585,
     latitudeDelta: 0.0434,
     longitudeDelta: 0.0435,
   });
-  // function to check permissions and get Location
+  const [userMarker, setuserMarker] = useState({
+    latitude: 32.09266,
+    longitude: 34.8379585,
+  });
+  const [appState, setAppState] = useState(AppState.currentState);
   useEffect(() => {
     (async () => {
       const result = requestLocationPermission();
       result.then(res => {
-        console.log('res is:', res);
+        console.info('res is:', res);
         if (res) {
           Geolocation.getCurrentPosition(
             async position => {
-              console.log('position', position);
               setLocation({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
                 latitudeDelta: 0.0434,
                 longitudeDelta: 0.0435,
               });
-              console.log('location in useEffect', location);
-              addToCollection({
+              setuserMarker({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               });
+              writeUserData(userMarker);
+              // addToCollection({
+              //   latitude: position.coords.latitude,
+              //   longitude: position.coords.longitude,
+              // });
               // console.log('document id', id);
             },
             error => {
@@ -73,7 +84,23 @@ const App = () => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // console.log('location', location, new Date().toLocaleString());
+  AppState.addEventListener('change', nextAppState => {
+    if (appState.match(/inactive|background/) && nextAppState !== 'active') {
+      console.log('App has come to the foreground!', nextAppState);
+      removeUser();
+    }
+    if (nextAppState === 'active') {
+      // writeUserData(userMarker);
+      checkCoordinates(userMarker, location, setuserMarker);
+    }
+    setAppState(nextAppState);
+  });
+  // AppState.addEventListener('change', nextAppState => {
+  //   if (nextAppState !== 'active') {
+  //     console.log(`i can remove ${nextAppState}`);
+  //   }
+  // });
+  // console.info('location', location, new Date().toLocaleString());
 
   return (
     <View style={styles.container}>
@@ -91,10 +118,11 @@ const App = () => {
         }
         showsUserLocation={true}
         followsUserLocation={true} //Apple Maps only.
-        userLocationPriority={'high'} //android maps only.
+        userLocationPriority={'low'} //android maps only.
         userLocationUpdateInterval={5000} //folllwo user location updates every 5 seconds
         showsCompass={true}
         loadingEnabled={true}
+        zoomEnabled={true}
         onUserLocationChange={event => {
           // console.log('onUserLocationChange', event.nativeEvent.coordinate);
           setLocation({
@@ -103,9 +131,20 @@ const App = () => {
             latitudeDelta: 0.009,
             longitudeDelta: 0.009,
           });
-          checkCoordinates(location, event.nativeEvent.coordinate);
+          checkCoordinates(
+            userMarker,
+            event.nativeEvent.coordinate,
+            setuserMarker,
+          );
         }}
-      />
+        onPress={Userlocation => {
+          console.info(
+            'press on map in coordinates',
+            Userlocation.nativeEvent.coordinate,
+          );
+        }}>
+        {showMarkersOnMap()}
+      </MapView>
     </View>
   );
 };
@@ -113,6 +152,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  marker: {flex: 1},
   map: {
     width: '100%',
     height: '100%',

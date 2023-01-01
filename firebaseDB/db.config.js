@@ -1,8 +1,10 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+// import {getDatabase} from 'firebase/database';
+// import {initializeApp, ref, set} from 'firebase/app';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyD3VcHXM_nT-A9KQ0U5SoRqeDIDKWDAO_U',
   authDomain: 'durable-timing-370613.firebaseapp.com',
   projectId: 'durable-timing-370613',
@@ -28,13 +30,15 @@ const firebaseConfig = {
 //   measurementId: 'G-FXZSK6EZFN',
 // };
 
-console.log('firebase connect', firebase.apps.length);
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
+  console.log('firebase connect');
+  // firebase.auth();
+  firebase
+    .firestore()
+    .settings({experimentalForceLongPolling: true, merge: true});
+} else {
+  firebase.app(); // if already initialized, use that one
 }
-firebase.auth();
-firebase
-  .firestore()
-  .settings({experimentalForceLongPolling: true, merge: true});
 
 export {firebase};
