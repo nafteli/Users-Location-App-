@@ -11,10 +11,10 @@ export const writeUserData = async (coordinates, imageUrl) => {
   let name = getDeviceId();
   let userId = await getUuid();
   try {
-    if (!userId) {
+    if (!userId || userId == null || userId === undefined) {
       let mesgg = 'userId can not be empty';
       console.log(mesgg, userId);
-      // return mesgg;
+      return mesgg;
     }
     set(ref(database, 'users/' + userId), {
       coordinates: coordinates,

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Marker} from 'react-native-maps';
-import {check_lat_lon} from './checkCoordinates';
 import {readUsers} from './firebaseDB/rtdb_write_read';
 
 // const markers = {
@@ -26,6 +25,13 @@ export const showMarkersOnMap = () => {
   let markerUser = readUsers();
   try {
     return Object.entries(markerUser).map((marker, i) => {
+      if (
+        marker[0] === null ||
+        marker[0] === undefined ||
+        marker[0] === 'null'
+      ) {
+        return;
+      }
       return (
         <Marker
           key={i}

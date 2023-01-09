@@ -6,6 +6,7 @@ import {StyleSheet, View, PermissionsAndroid, AppState} from 'react-native';
 import {checkCoordinates} from './checkCoordinates';
 import {showMarkersOnMap} from './markers';
 import {removeUser, writeUserData} from './firebaseDB/rtdb_write_read';
+import {getUniqueId} from 'react-native-device-info';
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -54,7 +55,7 @@ const App = () => {
         console.info('res is:', res);
         if (res) {
           Geolocation.getCurrentPosition(
-            async position => {
+            position => {
               setLocation({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
@@ -90,17 +91,12 @@ const App = () => {
       removeUser();
     }
     if (nextAppState === 'active') {
-      // writeUserData(userMarker);
-      checkCoordinates(userMarker, location, setuserMarker);
+      writeUserData(userMarker);
+      // checkCoordinates(userMarker, location, setuserMarker);
     }
     setAppState(nextAppState);
   });
-  // AppState.addEventListener('change', nextAppState => {
-  //   if (nextAppState !== 'active') {
-  //     console.log(`i can remove ${nextAppState}`);
-  //   }
-  // });
-  // console.info('location', location, new Date().toLocaleString());
+  console.info('location', location, userMarker, new Date().toLocaleString());
 
   return (
     <View style={styles.container}>
@@ -110,8 +106,8 @@ const App = () => {
           location
             ? location
             : {
-                latitude: 37.4219927,
-                longitude: -122.0840173,
+                latitude: 32.09266,
+                longitude: 34.8379585,
                 latitudeDelta: 0.0434,
                 longitudeDelta: 0.0435,
               }
